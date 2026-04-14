@@ -44,16 +44,56 @@ pandas · numpy · matplotlib · seaborn · scipy · sklearn · statsmodels
 ## Analysis Overview
 
 ### 1. Exploratory Data Analysis (EDA)
-- Distribution of clicks and conversions via histograms
-- Conversion category frequency comparison (less than 6 / 6–10 / 10–15 / 15+)
-- Both platforms showed roughly symmetrical distributions — no major outliers
 
-### 2. Correlation Analysis
-- **Facebook:** Clicks vs Conversions correlation = **0.87** (strong positive)
-- **AdWords:** Clicks vs Conversions correlation = **0.45** (moderate positive)
-- Facebook clicks are a much stronger predictor of conversions
+Distribution of Facebook Ad Clicks and Conversions — both show a roughly symmetrical shape with no major outliers.
 
-### 3. Hypothesis Testing (Welch's T-Test)
+![Histogram](images/histogram.png)
+
+---
+
+### 2. Conversion Category Comparison
+
+Facebook dominates in higher conversion ranges (10–15 and 15+), while AdWords stays stuck in the lower ranges (less than 6 and 6–10).
+
+![Conversion Categories](images/conversion_categories.png)
+
+---
+
+### 3. Correlation Analysis — Do clicks lead to conversions?
+
+Facebook shows a strong upward trend (r = 0.87). AdWords is much more scattered (r = 0.45), meaning clicks don't reliably lead to conversions.
+
+![Scatter Plot](images/scatter_clicks_conversions.png)
+
+---
+
+### 4. Linear Regression
+
+Predicting Facebook conversions from clicks — the best fit line confirms a strong linear relationship (R² = 76.35%).
+
+![Regression](images/regression.png)
+
+| Clicks | Expected Conversions |
+|---|---|
+| 50 | ~5.9 |
+| 80 | ~8.8 |
+
+---
+
+### 5. Time-Series Analysis
+
+**Weekly:** Monday and Tuesday consistently show the highest conversions.
+
+![Weekly Conversions](images/weekly_conversions.png)
+
+**Monthly CPC:** May and November are the most cost-effective months. February is the most expensive.
+
+![Monthly CPC](images/monthly_cpc.png)
+
+---
+
+## Hypothesis Testing (Welch's T-Test)
+
 - **H0:** No difference in conversions between Facebook and AdWords
 - **H1:** Facebook generates more conversions than AdWords
 
@@ -66,18 +106,6 @@ pandas · numpy · matplotlib · seaborn · scipy · sklearn · statsmodels
 
 > Facebook delivers statistically significantly more conversions (p << 0.05)
 
-### 4. Linear Regression
-- Predicted Facebook conversions based on number of clicks
-- **R² Score: 76.35%** — clicks explain 76% of variation in conversions
-- For 50 clicks → ~5.9 expected conversions
-- For 80 clicks → ~8.8 expected conversions
-
-### 5. Time-Series Analysis
-- **Best days:** Monday & Tuesday (highest weekly conversions)
-- **Best months (low CPC):** May & November
-- **Worst month (high CPC):** February
-- **Cointegration test** confirmed a long-term stable relationship between ad spend and conversions
-
 ---
 
 ## Key Findings
@@ -85,8 +113,8 @@ pandas · numpy · matplotlib · seaborn · scipy · sklearn · statsmodels
 - Facebook generates **~2x more conversions** per day than AdWords
 - Facebook clicks are a **strong predictor** of conversions (r = 0.87)
 - The difference is **statistically significant** — not due to random chance
-- **May & November** are the most cost-effective months to advertise on Facebook
-- Ad spend and conversions have a **long-term equilibrium** relationship
+- **May & November** are the most cost-effective months to run Facebook Ads
+- Ad spend and conversions have a **long-term equilibrium** relationship (Cointegration confirmed)
 
 ---
 
@@ -103,6 +131,13 @@ facebook-vs-adwords-ab-test/
 │
 ├── facebook_vs_adwords_ab_analysis.ipynb   # Main analysis notebook
 ├── marketing_campaign.csv                  # Dataset
+├── images/                                 # All plot screenshots
+│   ├── histogram.png
+│   ├── conversion_categories.png
+│   ├── scatter_clicks_conversions.png
+│   ├── regression.png
+│   ├── weekly_conversions.png
+│   └── monthly_cpc.png
 ├── README.md
 └── LICENSE
 ```
